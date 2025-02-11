@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="heart.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.0-beta.6/vuetify.min.js"></script>
+    <title>HPPI VALENTINE</title>
+  </head>
+  <body>
+    
+    <div id="app">
+      <div class="container">
+        <div class="album" :class="{'album--open': isOpenedTop}">
+          <div
+            class="album__paper"
+            :style="{zIndex: isOpenedTop ? 0 : items.length + 1 }"
+            :class="{'open': isOpenedTop}"
+            @click="topOpen(isOpenedTop)">
+            <div
+              class="album__page front"
+              :style="{transform: `translateZ(0.${items.length + 1}px)`}">
+              <div>
+                <div class="album__top-title">N/R</div>
+                <hr>
+                <h1 class="heart">The Magic of Us...</h1>
+                <p class="txt-meowish">Jokes aside…  I know I mess up sometimes, I may not be the most romantic, the best at planning, or even the best at texting back on time… but one thing I’ll never fail at loving you! Sorry for being emotionally unavailable 364 days a year. But today? today is all about u, HAPPI VALENTIN'S Day..</p>
+              </div>
+            </div>
+            <div class="album__page back" :style="{zIndex: 0}"></div>
+          </div>
+          <div
+            class="album__paper"
+            v-for="(page, idx) in items"
+            :key="idx + 1"
+            :style="{zIndex: page.isOpen ? idx + 1 : items.length + 1 - (idx + 1) }"
+            :class="{'open': page.isOpen}"
+            @click="idx + 1 === items.length ? reset() : open(idx, page.isOpen)">
+            <div
+              class="album__page front"
+              :style="{transform: `translateZ(0.${items.length + 1 - (idx + 1)}px)`}">
+              <div class="content">
+                <div class="content__title">{{ page.title }}</div>
+                <div class="content__img1">
+                  <img :src="page.img1" />
+                  <div class="content__text">{{ idx + 1 }}</div>
+                </div>
+                <div class="content__img2"><img :src="page.img2" /></div>`
+                <div class="content__img3"><img :src="page.img3" /></div>
+              </div>
+            </div>
+            <div class="album__page back" :style="{zIndex: idx + 1}"></div>
+          </div>
+          <div class="album__back"></div>
+          <div class="album__bottom"></div>
+          <div class="album__shadow"></div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
